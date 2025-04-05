@@ -17,6 +17,7 @@ import { LoginDTO } from './dto/login.dto';
 import { OtpDTO } from './dto/otp.dto';
 import { ResetDTO } from './dto/reset.dto';
 import { User as UserType } from './types/user.type';
+import { RegisterDTO } from './dto/register.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -47,6 +48,12 @@ export class AuthController {
   @Post('login')
   async login(@Body() { email, password }: LoginDTO) {
     return this.service.login({ email, password });
+  }
+
+  @Public()
+  @Post('register')
+  async register(@Body() { name, email, password, cpf }: RegisterDTO) {
+    return this.service.register({ name, email, password, cpf });
   }
 
   @Public()

@@ -29,6 +29,9 @@ import { MultifactorType } from './enums/multifactor-type.enum';
 
 @Injectable()
 export class AuthService {
+  register(arg0: { name: string; email: string; password: string; cpf: string; }) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private readonly configService: ConfigService,
     @Inject(forwardRef(() => PrismaService))

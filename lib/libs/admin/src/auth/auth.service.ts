@@ -26,12 +26,10 @@ import { LoginDTO } from './dto/login.dto';
 import { OtpDTO } from './dto/otp.dto';
 import { ResetDTO } from './dto/reset.dto';
 import { MultifactorType } from './enums/multifactor-type.enum';
+import { RegisterDTO } from './dto/register.dto';
 
 @Injectable()
 export class AuthService {
-  register(arg0: { name: string; email: string; password: string; cpf: string; }) {
-    throw new Error('Method not implemented.');
-  }
   constructor(
     private readonly configService: ConfigService,
     @Inject(forwardRef(() => PrismaService))
@@ -41,6 +39,18 @@ export class AuthService {
     @Inject(forwardRef(() => MailService))
     private readonly mail: MailService,
   ) {}
+
+  async register({ name, email, password, cpf }: RegisterDTO) {
+    const salt = await genSalt();
+    const hashed = await hash(password, salt);
+    return this.prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashed,
+      },
+    });
+  }
 
   async createUserCheck(code: string) {
     try {

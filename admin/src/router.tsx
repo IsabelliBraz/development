@@ -67,6 +67,14 @@ const routes = [
             }),
           },
           {
+            path: "appearance",
+            lazy: async () => ({
+              Component: (
+                await import("./pages/management/appearance/index.tsx")
+              ).default,
+            }),
+          },
+          {
             path: "dashboard",
             lazy: async () => ({
               Component: (

@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { AppearanceModule } from '@hedhog/appearance';
+import { FileModule } from '@hedhog/file';
 import { AdminModule } from '@hedhog/admin';
 import { MailModule } from '@hedhog/mail';
 import { LocaleModule } from '@hedhog/locale';
@@ -23,6 +25,8 @@ import { PrismaModule } from '@hedhog/prisma';
       from: String(process.env.MAIL_FROM),
     }),
     AdminModule,
+    FileModule,
+    AppearanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
